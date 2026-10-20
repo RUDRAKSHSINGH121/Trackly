@@ -1,0 +1,17 @@
+# Dependencies
+node_modules/
+
+# SQLite databases & runtime files
+*.db
+*.db-shm
+*.db-wal
+
+# Operating System Files
+.DS_Store
+Thumbs.db
+
+# Logs & temp
+*.log
+npm-debug.log*
+.idea/
+.vscode/

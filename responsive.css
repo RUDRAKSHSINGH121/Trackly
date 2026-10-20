@@ -1,0 +1,212 @@
+/* ==========================================================================
+   TRACKLY — Responsive Breakpoints & Device Adaptations
+   ========================================================================== */
+
+/* Drop target & Card Interaction Enhancements */
+.drop-target {
+  outline: 2px dashed #818cf8 !important;
+  outline-offset: -2px;
+  background: rgba(99, 102, 241, 0.1) !important;
+}
+
+.application-card.dragging {
+  opacity: 0.35;
+  transform: scale(0.97) rotate(2deg);
+  box-shadow: 0 14px 28px rgba(0, 0, 0, 0.4);
+}
+
+/* Large Screens */
+@media (min-width: 1560px) {
+  .page-head, .stats, .content-grid, .section-head, .kanban {
+    max-width: 1560px;
+  }
+}
+
+/* Laptops & Tablets (Max 1200px) */
+@media (max-width: 1200px) {
+  .stats {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .content-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .focus-panel {
+    display: flex;
+  }
+}
+
+/* Medium Tablets (Max 960px) */
+@media (max-width: 960px) {
+  .app-shell {
+    grid-template-columns: 220px 1fr;
+  }
+
+  .topbar {
+    padding: 0 24px;
+  }
+
+  .page-head, .stats, .content-grid, .section-head, .kanban {
+    padding-left: 24px;
+    padding-right: 24px;
+  }
+
+  .kanban {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+
+  .kanban-column {
+    min-height: auto;
+  }
+}
+
+/* Mobile Devices (Max 768px) */
+@media (max-width: 768px) {
+  .app-shell {
+    display: block;
+  }
+
+  .sidebar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 280px;
+    height: 100vh;
+    z-index: 1000;
+    transform: translateX(-100%);
+    box-shadow: 0 0 40px rgba(0, 0, 0, 0.5);
+  }
+
+  .sidebar.mobile-open {
+    transform: translateX(0);
+  }
+
+  .sidebar-close-btn {
+    display: block;
+  }
+
+  .mobile-menu {
+    display: grid;
+    place-items: center;
+  }
+
+  .topbar {
+    height: 60px;
+    padding: 0 16px;
+  }
+
+  .breadcrumb, .command-button kbd {
+    display: none;
+  }
+
+  .command-button {
+    padding: 0 8px;
+    font-size: 11.5px;
+  }
+
+  .command-button span {
+    display: none;
+  }
+
+  .top-actions {
+    gap: 6px;
+  }
+
+  .add-button span {
+    display: none;
+  }
+
+  .add-button {
+    padding: 0 10px;
+  }
+
+  .page-head {
+    padding: 24px 16px 18px;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 14px;
+  }
+
+  .page-head h1 {
+    font-size: 23px;
+  }
+
+  .stats, .content-grid, .section-head, .kanban {
+    padding-left: 16px;
+    padding-right: 16px;
+  }
+
+  .stats {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+
+  .section-head {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 14px;
+    margin-top: 24px;
+  }
+
+  .filters-bar {
+    width: 100%;
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .search-input-wrap {
+    width: 100%;
+  }
+
+  .filter-group {
+    width: 100%;
+    overflow-x: auto;
+  }
+
+  .filter-tag-btn, .filter-button {
+    flex: 1;
+    justify-content: center;
+  }
+}
+
+/* Small Mobile Screens (Max 480px) */
+@media (max-width: 480px) {
+  .page-head h1 {
+    font-size: 21px;
+  }
+
+  .stat-card {
+    padding: 16px;
+  }
+
+  .counter-val {
+    font-size: 26px;
+  }
+
+  .chart-y {
+    padding-right: 6px;
+    font-size: 9px;
+  }
+
+  .chart-labels {
+    font-size: 9px;
+  }
+
+  .meta-grid {
+    grid-template-columns: 1fr;
+  }
+
+  dialog.modern-dialog {
+    width: calc(100vw - 20px);
+  }
+
+  dialog form {
+    padding: 18px;
+  }
+
+  .preset-chips {
+    gap: 4px;
+  }
+}

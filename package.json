@@ -1,0 +1,12 @@
+{
+  "name": "trackly",
+  "version": "1.0.0",
+  "private": true,
+  "description": "A full-stack job application tracker built with Node.js and SQLite.",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node --watch server.js",
+    "test": "node --test tests/api.test.js"
+  },
+  "engines": { "node": ">=22.13.0" }
+}

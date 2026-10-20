@@ -1,0 +1,633 @@
+<!doctype html>
+<html lang="en" data-theme="dark">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Trackly — A modern, high-performance job application tracker and career pipeline dashboard." />
+    <meta name="keywords" content="job tracker, kanban board, career management, software engineer portfolio, resume project" />
+    <meta name="theme-color" content="#0a0d14" />
+    <title>Trackly — Modern Job Search & Pipeline Dashboard</title>
+    
+    <!-- Modern Typography -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=DM+Mono:ital,wght@0,400;0,500;1,400&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+    
+    <link rel="stylesheet" href="./styles.css" />
+    <link rel="stylesheet" href="./responsive.css" />
+  </head>
+  <body>
+    <!-- Background Ambient Glow Effects -->
+    <div class="ambient-glow glow-1" aria-hidden="true"></div>
+    <div class="ambient-glow glow-2" aria-hidden="true"></div>
+
+    <div class="app-shell">
+      <!-- Sidebar Navigation -->
+      <aside class="sidebar" aria-label="Primary navigation" id="sidebar">
+        <div class="sidebar-header">
+          <a class="brand" href="#dashboard" aria-label="Trackly home">
+            <span class="brand-mark">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/>
+              </svg>
+            </span>
+            <span class="brand-text">trackly<span class="brand-badge">PRO</span></span>
+          </a>
+          <button class="sidebar-close-btn" id="sidebar-close" aria-label="Close menu">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6 6 18M6 6l12 12"/></svg>
+          </button>
+        </div>
+
+        <nav class="nav-links">
+          <span class="nav-category">WORKSPACE</span>
+          <a class="nav-link active" href="#dashboard" id="nav-overview">
+            <svg class="nav-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect width="7" height="9" x="3" y="3" rx="1"/><rect width="7" height="5" x="14" y="3" rx="1"/><rect width="7" height="9" x="14" y="12" rx="1"/><rect width="7" height="5" x="3" y="16" rx="1"/></svg>
+            <span>Overview</span>
+          </a>
+          <a class="nav-link" href="#pipeline" id="nav-pipeline">
+            <svg class="nav-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect width="18" height="18" x="3" y="3" rx="2"/><path d="M9 3v18M15 3v18"/></svg>
+            <span>Pipeline</span>
+            <b id="nav-count">8</b>
+          </a>
+          <a class="nav-link" href="#analytics" id="nav-insights">
+            <svg class="nav-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 3v18h18"/><path d="m19 9-5 5-4-4-3 3"/></svg>
+            <span>Analytics</span>
+          </a>
+          <a class="nav-link" href="#schedule" id="nav-calendar">
+            <svg class="nav-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect width="18" height="18" x="3" y="4" rx="2"/><line x1="16" x2="16" y1="2" y2="6"/><line x1="8" x2="8" y1="2" y2="6"/><line x1="3" x2="21" y1="10" y2="10"/></svg>
+            <span>Schedule</span>
+            <span class="live-dot" title="2 events today"></span>
+          </a>
+
+          <span class="nav-category" style="margin-top: 18px;">QUICK FILTERS</span>
+          <button class="filter-pill-nav active" data-filter="all">
+            <span class="dot-indicator dot-purple"></span> All Applications
+          </button>
+          <button class="filter-pill-nav" data-filter="high-match">
+            <span class="dot-indicator dot-green"></span> High Match (≥90%)
+          </button>
+          <button class="filter-pill-nav" data-filter="interview-stage">
+            <span class="dot-indicator dot-amber"></span> In Interview
+          </button>
+        </nav>
+
+        <div class="sidebar-bottom">
+          <div class="quick-status-badge">
+            <div class="pulse-indicator"></div>
+            <span>SQLite DB Connected</span>
+          </div>
+
+          <div class="upgrade-card">
+            <div class="upgrade-glow"></div>
+            <div class="upgrade-top">
+              <span class="spark">✦</span>
+              <strong>AI Match Engine</strong>
+            </div>
+            <p>Smart resume keywords & scoring powered by native SQLite.</p>
+            <div class="progress-bar"><div class="progress-bar-fill" style="width: 84%;"></div></div>
+          </div>
+
+          <div class="profile-card">
+            <div class="avatar">
+              <span>AS</span>
+              <span class="avatar-status"></span>
+            </div>
+            <div class="profile-info">
+              <strong>Arjun Sharma</strong>
+              <small>Full Stack Engineer</small>
+            </div>
+            <button class="theme-toggle-btn" id="sidebar-theme-toggle" title="Toggle Dark/Light Mode" aria-label="Toggle theme">
+              <svg class="sun-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/></svg>
+              <svg class="moon-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"/></svg>
+            </button>
+          </div>
+        </div>
+      </aside>
+
+      <!-- Main Application Container -->
+      <main class="main-content">
+        <!-- Top Navigation Bar -->
+        <header class="topbar">
+          <div class="topbar-left">
+            <button class="mobile-menu" id="mobile-menu-btn" aria-label="Open navigation">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="4" x2="20" y1="12" y2="12"/><line x1="4" x2="20" y1="6" y2="6"/><line x1="4" x2="20" y1="18" y2="18"/></svg>
+            </button>
+            <div class="breadcrumb">
+              <span>Workspace</span>
+              <span class="breadcrumb-separator">/</span>
+              <strong>Career Dashboard</strong>
+            </div>
+          </div>
+
+          <div class="top-actions">
+            <!-- Command Palette Trigger Button -->
+            <button class="command-button" type="button" id="command-btn" title="Open Command Palette (Ctrl+K or ⌘K)">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
+              <span>Quick search...</span>
+              <kbd>⌘K</kbd>
+            </button>
+
+            <!-- Export Data Button -->
+            <button class="icon-button" id="export-btn" title="Export Applications (JSON/CSV)" aria-label="Export Data">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" x2="12" y1="15" y2="3"/></svg>
+            </button>
+
+            <!-- Notifications Button with mock popover -->
+            <div class="notification-wrap">
+              <button class="icon-button" id="notification-btn" aria-label="Notifications" title="Recent Notifications">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9"/><path d="M10.3 21a1.94 1.94 0 0 0 3.4 0"/></svg>
+                <i class="notif-badge"></i>
+              </button>
+              <div class="notif-dropdown" id="notif-dropdown">
+                <div class="notif-header">
+                  <strong>Activity Updates</strong>
+                  <span class="badge-tag">2 new</span>
+                </div>
+                <div class="notif-item unread">
+                  <span class="notif-icon interview">◉</span>
+                  <div>
+                    <strong>Figma Interview Call</strong>
+                    <p>Portfolio review session starts today at 2:30 PM.</p>
+                    <time>35m ago</time>
+                  </div>
+                </div>
+                <div class="notif-item unread">
+                  <span class="notif-icon offer">✦</span>
+                  <div>
+                    <strong>Arc Offer Letter</strong>
+                    <p>Formal package details updated in your offer stage.</p>
+                    <time>2h ago</time>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Topbar Theme Switcher -->
+            <button class="icon-button" id="topbar-theme-toggle" aria-label="Toggle theme" title="Toggle Theme (Dark / Light)">
+              <svg class="sun-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/></svg>
+              <svg class="moon-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"/></svg>
+            </button>
+
+            <!-- Add Application CTA -->
+            <button class="add-button" id="open-modal" type="button">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 5v14M5 12h14"/></svg>
+              <span>Add application</span>
+            </button>
+          </div>
+        </header>
+
+        <!-- Page Header & Greeting -->
+        <section class="page-head" id="dashboard">
+          <div class="page-head-info">
+            <div class="live-status-row">
+              <p class="eyebrow" id="live-date">OCTOBER 2026</p>
+              <span class="active-badge"><span class="badge-pulse"></span> Pipeline Active</span>
+            </div>
+            <h1>Good morning, Arjun <span class="sparkle-accent">✦</span></h1>
+            <p class="subtitle">Here’s a live breakdown of your software engineering application momentum.</p>
+          </div>
+          
+          <div class="page-head-actions">
+            <div class="week-selector">
+              <button class="week-nav-btn" aria-label="Previous week">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m15 18-6-6 6-6"/></svg>
+              </button>
+              <strong id="date-range-label">Oct 19 – 25</strong>
+              <button class="week-nav-btn" aria-label="Next week">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m9 18 6-6-6-6"/></svg>
+              </button>
+            </div>
+          </div>
+        </section>
+
+        <!-- Stats Overview Row -->
+        <section class="stats" aria-label="Application statistics">
+          <!-- Total Applications Card -->
+          <article class="stat-card accent-purple">
+            <div class="stat-header">
+              <div class="stat-icon purple-gradient">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 20V4a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/><rect width="20" height="14" x="2" y="6" rx="2"/></svg>
+              </div>
+              <span class="stat-pill positive">+12% this week</span>
+            </div>
+            <div class="stat-body">
+              <p class="stat-label">Total Applications</p>
+              <h2 id="applications-count" class="counter-val">10</h2>
+            </div>
+            <div class="stat-sparkline" aria-hidden="true">
+              <div class="mini-bars">
+                <i style="height: 35%;"></i>
+                <i style="height: 55%;"></i>
+                <i style="height: 40%;"></i>
+                <i style="height: 75%;"></i>
+                <i style="height: 60%;"></i>
+                <i style="height: 95%;" class="active-bar"></i>
+                <i style="height: 80%;"></i>
+              </div>
+            </div>
+          </article>
+
+          <!-- Active Interviews Card -->
+          <article class="stat-card accent-orange">
+            <div class="stat-header">
+              <div class="stat-icon orange-gradient">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m22 8-6 4 6 4V8Z"/><rect width="14" height="12" x="2" y="6" rx="2"/></svg>
+              </div>
+              <span class="stat-pill orange-pill">In Progress</span>
+            </div>
+            <div class="stat-body">
+              <p class="stat-label">Active Interviews</p>
+              <h2 id="interview-count" class="counter-val">3</h2>
+            </div>
+            <div class="ring ring-orange">
+              <div class="ring-inner">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="7 17 17 7 17 17"/><polyline points="7 7 17 7"/></svg>
+              </div>
+            </div>
+          </article>
+
+          <!-- Response Rate Card -->
+          <article class="stat-card accent-blue">
+            <div class="stat-header">
+              <div class="stat-icon blue-gradient">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
+              </div>
+              <span class="stat-pill blue-pill">Top 5% Bench</span>
+            </div>
+            <div class="stat-body">
+              <p class="stat-label">Response Rate</p>
+              <h2 id="response-rate" class="counter-val">70%</h2>
+            </div>
+            <div class="ring ring-blue" id="response-ring">
+              <div class="ring-inner">
+                <span class="ring-pct">70%</span>
+              </div>
+            </div>
+          </article>
+
+          <!-- Offers Received Card -->
+          <article class="stat-card accent-green">
+            <div class="stat-header">
+              <div class="stat-icon green-gradient">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6"/><path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18"/><path d="M4 22h16"/><path d="M10 14.66V17c0 .55-.47.98-.97 1.21C7.85 18.75 7 20.24 7 22"/><path d="M14 14.66V17c0 .55.47.98.97 1.21C16.15 18.75 17 20.24 17 22"/><path d="M18 2H6v7a6 6 0 0 0 12 0V2Z"/></svg>
+              </div>
+              <span class="stat-pill green-pill">Celebrate! 🎉</span>
+            </div>
+            <div class="stat-body">
+              <p class="stat-label">Job Offers</p>
+              <h2 id="offer-count" class="counter-val">4</h2>
+            </div>
+            <div class="offer-shape green-glow">
+              <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+            </div>
+          </article>
+        </section>
+
+        <!-- Interactive Charts & Up Next Row -->
+        <section class="content-grid" id="analytics">
+          <!-- Activity Line Chart Panel -->
+          <article class="panel activity-panel">
+            <div class="panel-heading">
+              <div>
+                <p class="eyebrow">APPLICATION VELOCITY</p>
+                <h2>Submission Activity</h2>
+              </div>
+              <div class="panel-controls">
+                <div class="timeframe-toggle">
+                  <button class="tf-btn active" data-days="7">7 Days</button>
+                  <button class="tf-btn" data-days="30">30 Days</button>
+                </div>
+              </div>
+            </div>
+
+            <!-- SVG Chart with Interactive Hover Cursor -->
+            <div class="chart-container">
+              <div class="chart-y">
+                <span>8</span>
+                <span>6</span>
+                <span>4</span>
+                <span>2</span>
+                <span>0</span>
+              </div>
+              <div class="chart-canvas-area" id="chart-area">
+                <div class="grid-lines">
+                  <i></i><i></i><i></i><i></i><i></i>
+                </div>
+                <svg id="activity-chart-svg" viewBox="0 0 600 180" preserveAspectRatio="none" aria-label="Interactive application velocity line chart">
+                  <defs>
+                    <linearGradient id="chartGlowGradient" x1="0" y1="0" x2="0" y2="1">
+                      <stop offset="0%" stop-color="#6366f1" stop-opacity="0.38"/>
+                      <stop offset="100%" stop-color="#6366f1" stop-opacity="0.0"/>
+                    </linearGradient>
+                    <linearGradient id="strokeGradient" x1="0" y1="0" x2="1" y2="0">
+                      <stop offset="0%" stop-color="#818cf8"/>
+                      <stop offset="50%" stop-color="#6366f1"/>
+                      <stop offset="100%" stop-color="#a855f7"/>
+                    </linearGradient>
+                  </defs>
+                  <!-- Gradient Area -->
+                  <path id="chart-area-path" d="M0 142 C45 125 55 134 86 110 S140 132 172 100 S225 85 257 104 S318 123 343 70 S403 69 428 90 S481 121 514 44 S565 73 600 30 L600 180 L0 180Z" fill="url(#chartGlowGradient)"/>
+                  <!-- Smooth Curve Line -->
+                  <path id="chart-line-path" d="M0 142 C45 125 55 134 86 110 S140 132 172 100 S225 85 257 104 S318 123 343 70 S403 69 428 90 S481 121 514 44 S565 73 600 30" fill="none" stroke="url(#strokeGradient)" stroke-width="3.5" stroke-linecap="round"/>
+                </svg>
+                
+                <!-- Dynamic Hover Tooltip Point -->
+                <div class="chart-tooltip" id="chart-tooltip">
+                  <span class="tt-count" id="tooltip-count">6 applications</span>
+                  <span class="tt-date" id="tooltip-date">Thursday, Oct 22</span>
+                </div>
+                <div class="chart-dot" id="chart-active-dot"></div>
+                <div class="chart-crosshair" id="chart-crosshair"></div>
+
+                <div class="chart-labels" id="chart-labels">
+                  <span>Mon</span>
+                  <span>Tue</span>
+                  <span>Wed</span>
+                  <span>Thu</span>
+                  <span>Fri</span>
+                  <span>Sat</span>
+                  <span>Sun</span>
+                </div>
+              </div>
+            </div>
+          </article>
+
+          <!-- Today's Focus / Upcoming Pipeline Panel -->
+          <article class="panel focus-panel" id="schedule">
+            <div class="panel-heading">
+              <div>
+                <p class="eyebrow">UP NEXT</p>
+                <h2>Today’s Schedule</h2>
+              </div>
+              <span class="badge-tag">2 events</span>
+            </div>
+
+            <div class="focus-date-pill">
+              <div class="focus-day-num">20</div>
+              <div class="focus-day-meta">
+                <span>OCTOBER</span>
+                <strong>TUESDAY</strong>
+              </div>
+            </div>
+
+            <div class="focus-list">
+              <div class="focus-item highlight">
+                <span class="company-logo figma-logo">
+                  <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M12 12a4 4 0 1 0 4-4 4 4 0 0 0-4 4Zm0 8a4 4 0 1 0 4-4 4 4 0 0 0-4 4Zm-8-8a4 4 0 0 0 4 4h4v-8H8a4 4 0 0 0-4 4Zm0-8a4 4 0 0 0 4 4h4V4H8a4 4 0 0 0-4 4Zm0 16a4 4 0 0 0 4 4 4 4 0 0 0 4-4v-4H8a4 4 0 0 0-4 4Z"/></svg>
+                </span>
+                <div class="focus-info">
+                  <strong>Figma · Lead Product Designer</strong>
+                  <small>Portfolio Deep-Dive Call · 2:30 PM (Google Meet)</small>
+                </div>
+                <a href="#pipeline" class="action-btn-small" title="View Figma stage">
+                  <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="7 17 17 7 17 17"/><polyline points="7 7 17 7"/></svg>
+                </a>
+              </div>
+
+              <div class="focus-item">
+                <span class="company-logo linear-logo">
+                  <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><circle cx="12" cy="12" r="10"/></svg>
+                </span>
+                <div class="focus-info">
+                  <strong>Linear · Full Stack UI Engineer</strong>
+                  <small>Submit Architecture Take-Home · 6:00 PM</small>
+                </div>
+                <a href="#pipeline" class="action-btn-small" title="View Linear stage">
+                  <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="7 17 17 7 17 17"/><polyline points="7 7 17 7"/></svg>
+                </a>
+              </div>
+            </div>
+
+            <button class="view-calendar" id="calendar-jump-btn" type="button">
+              <span>View full interview roadmap</span>
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+            </button>
+          </article>
+        </section>
+
+        <!-- Pipeline Header & Search/Filters -->
+        <section class="section-head" id="pipeline">
+          <div>
+            <div class="section-badge">INTERACTIVE KANBAN</div>
+            <h2>Application Pipeline</h2>
+            <p class="section-sub">Drag cards between stages or use quick actions to update progress.</p>
+          </div>
+
+          <div class="filters-bar">
+            <!-- Search Input -->
+            <label class="search-input-wrap">
+              <svg class="search-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
+              <input id="search" placeholder="Search company or role..." autocomplete="off" />
+              <button class="search-clear-btn" id="search-clear" aria-label="Clear search">×</button>
+            </label>
+
+            <!-- Quick Filter Presets -->
+            <div class="filter-group">
+              <button class="filter-tag-btn active" data-filter="all">All</button>
+              <button class="filter-tag-btn" data-filter="high-match">≥90% Match</button>
+              <button class="filter-button" id="filter-button">
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3"/></svg>
+                <span>Reset</span>
+              </button>
+            </div>
+          </div>
+        </section>
+
+        <!-- Kanban Board Container -->
+        <section class="kanban" id="board" aria-label="Application pipeline">
+          <!-- Populated dynamically by app.js -->
+        </section>
+      </main>
+    </div>
+
+    <!-- Celebration Confetti Canvas -->
+    <canvas id="confetti-canvas" class="confetti-canvas"></canvas>
+
+    <!-- Modal: Add New Application -->
+    <dialog id="application-modal" class="modern-dialog">
+      <form method="dialog" id="application-form">
+        <div class="modal-heading">
+          <div>
+            <p class="eyebrow">NEW OPPORTUNITY</p>
+            <h2>Add Application</h2>
+          </div>
+          <button class="modal-close-btn" value="cancel" aria-label="Close dialog">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6 6 18M6 6l12 12"/></svg>
+          </button>
+        </div>
+
+        <!-- Quick Company Presets for Fast Testing -->
+        <div class="presets-section">
+          <span class="preset-label">Quick autofill:</span>
+          <div class="preset-chips">
+            <button type="button" class="preset-chip" data-company="OpenAI" data-role="Full Stack Engineer" data-color="#10a37f">OpenAI</button>
+            <button type="button" class="preset-chip" data-company="Stripe" data-role="Frontend Engineer" data-color="#635bff">Stripe</button>
+            <button type="button" class="preset-chip" data-company="Linear" data-role="Product Engineer" data-color="#5e6ad2">Linear</button>
+            <button type="button" class="preset-chip" data-company="Apple" data-role="Software Engineer" data-color="#1d1d1f">Apple</button>
+          </div>
+        </div>
+
+        <div class="form-grid">
+          <label class="form-field">
+            <span>Company Name *</span>
+            <input required id="input-company" name="company" placeholder="e.g. Stripe, OpenAI, GitHub" />
+          </label>
+
+          <label class="form-field">
+            <span>Job Role *</span>
+            <input required id="input-role" name="role" placeholder="e.g. Senior Frontend Engineer" />
+          </label>
+
+          <div class="form-row">
+            <label class="form-field flex-1">
+              <span>Pipeline Stage</span>
+              <select name="stage" id="select-stage">
+                <option value="Applied">Applied</option>
+                <option value="Interview">Interview</option>
+                <option value="Offer">Offer</option>
+              </select>
+            </label>
+
+            <label class="form-field">
+              <span>Brand Color</span>
+              <div class="color-picker-wrap">
+                <input name="color" id="input-color" type="color" value="#6366f1" />
+                <span class="color-hex-label" id="color-hex-label">#6366f1</span>
+              </div>
+            </label>
+          </div>
+        </div>
+
+        <div class="modal-footer">
+          <button type="button" class="btn-secondary" id="modal-cancel-btn">Cancel</button>
+          <button class="submit-application" type="submit" value="default">
+            <span>Add to pipeline</span>
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          </button>
+        </div>
+      </form>
+    </dialog>
+
+    <!-- Slide-over Drawer: Application Details -->
+    <aside class="details-drawer" id="details-drawer" aria-hidden="true">
+      <div class="drawer-backdrop" id="drawer-backdrop"></div>
+      <div class="drawer-panel">
+        <div class="drawer-header">
+          <div class="drawer-company-brand">
+            <span class="company-dot-large" id="drawer-company-dot">OP</span>
+            <div>
+              <h2 id="drawer-company-name">Company Name</h2>
+              <p id="drawer-role-name">Role Title</p>
+            </div>
+          </div>
+          <button class="drawer-close-btn" id="drawer-close" aria-label="Close details">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6 6 18M6 6l12 12"/></svg>
+          </button>
+        </div>
+
+        <div class="drawer-body">
+          <!-- Stage Changer -->
+          <div class="drawer-section">
+            <label class="drawer-label">Current Pipeline Stage</label>
+            <div class="stage-stepper" id="drawer-stage-stepper">
+              <button type="button" class="stepper-btn" data-stage="Applied">Applied</button>
+              <button type="button" class="stepper-btn" data-stage="Interview">Interview</button>
+              <button type="button" class="stepper-btn" data-stage="Offer">Offer</button>
+            </div>
+          </div>
+
+          <!-- AI Match Breakdown -->
+          <div class="drawer-section">
+            <div class="match-score-header">
+              <label class="drawer-label">AI Match Score Breakdown</label>
+              <span class="match-pill large" id="drawer-match-score">94% match</span>
+            </div>
+            <div class="score-bars">
+              <div class="score-item">
+                <div class="score-meta"><span>Tech Stack Alignment</span><strong>96%</strong></div>
+                <div class="progress-bar"><div class="progress-bar-fill" style="width: 96%; background: #10b981;"></div></div>
+              </div>
+              <div class="score-item">
+                <div class="score-meta"><span>Experience Level</span><strong>92%</strong></div>
+                <div class="progress-bar"><div class="progress-bar-fill" style="width: 92%; background: #6366f1;"></div></div>
+              </div>
+              <div class="score-item">
+                <div class="score-meta"><span>Keywords Matched</span><strong>88%</strong></div>
+                <div class="progress-bar"><div class="progress-bar-fill" style="width: 88%; background: #f59e0b;"></div></div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Application Metadata -->
+          <div class="drawer-section meta-grid">
+            <div class="meta-card">
+              <span class="meta-label">Submitted On</span>
+              <strong id="drawer-applied-date">Oct 20, 2026</strong>
+            </div>
+            <div class="meta-card">
+              <span class="meta-label">Target Compensation</span>
+              <strong id="drawer-salary">$140,000 – $180,000</strong>
+            </div>
+            <div class="meta-card">
+              <span class="meta-label">Workplace Policy</span>
+              <strong>Remote / Flexible</strong>
+            </div>
+            <div class="meta-card">
+              <span class="meta-label">Interview Rounds</span>
+              <strong id="drawer-rounds">3 rounds remaining</strong>
+            </div>
+          </div>
+
+          <!-- Interview Prep Notes -->
+          <div class="drawer-section">
+            <label class="drawer-label">Interview Prep & Notes</label>
+            <div class="notes-box">
+              <p>• Review system architecture, distributed queues, and native SQLite synchronization.</p>
+              <p>• Highlight frontend rendering performance and responsive CSS design token systems.</p>
+              <p>• Prepare question regarding company engineering team growth.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="drawer-footer">
+          <button class="btn-danger" id="drawer-delete-btn" type="button">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 6h18M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2"/></svg>
+            <span>Delete Application</span>
+          </button>
+        </div>
+      </div>
+    </aside>
+
+    <!-- Command Palette (⌘K) Modal -->
+    <div class="command-palette-overlay" id="command-palette" aria-hidden="true">
+      <div class="command-palette-box">
+        <div class="palette-input-bar">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
+          <input id="palette-search-input" placeholder="Type a company, role, or action..." autocomplete="off" />
+          <kbd class="esc-kbd">ESC</kbd>
+        </div>
+
+        <div class="palette-results" id="palette-results">
+          <!-- Dynamic results inserted here -->
+        </div>
+
+        <div class="palette-footer">
+          <span><kbd>↑</kbd> <kbd>↓</kbd> to navigate</span>
+          <span><kbd>↵</kbd> to select</span>
+          <span><kbd>ESC</kbd> to dismiss</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Toast Notification -->
+    <div class="toast" id="toast" role="status">
+      <div class="toast-content">
+        <span class="toast-icon">✓</span>
+        <span class="toast-message">Application updated</span>
+      </div>
+      <button class="toast-undo" id="toast-undo" style="display:none;">Undo</button>
+    </div>
+
+    <script src="./app.js"></script>
+  </body>
+</html>
